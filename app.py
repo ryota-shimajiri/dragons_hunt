@@ -256,9 +256,7 @@ class APP:
         # 画面真っ暗に
         p.cls(0)
         # 文字を画面に描画
-        p.text(30, 30, "D R A G O N' S  H U N T", 7)
-        p.text(30, 60, "SPACE_KEY or V_KEY = ATTAK", 7)
-        p.text(30, 70, "ARROW_KEY = MOVE", 7)
+        p.text(30, 40, "D R A G O N' S  H U N T", 7)
         p.text(30, 90, "S = GAME START", 7)
         p.text(30, 100, "Q = QUIT", 7)
 
@@ -450,14 +448,28 @@ class APP:
             if p.frame_count % atk_speed == 0:
                 # 敵弾生成
                 new_enemy = unit.Enemy(9)
+                new_enemy1 = unit.Enemy(9)
+                new_enemy2 = unit.Enemy(9)
                 if (self.boss.boss_x <= self.p_ship.ship_x + 8
                     <= self.boss.boss_x + 45):
                     new_enemy.ene_x = self.p_ship.ship_x + 5
+                    new_enemy1.ene_x = self.p_ship.ship_x + 5
+                    new_enemy1.ene_y = self.boss.boss_y + 16
                 else:
                     # 自機の正面にいないときの攻撃
                     new_enemy.ene_x = self.p_ship.ship_x + 5
-                new_enemy.ene_y = self.boss.boss_y + 8                 
+
+                    new_enemy1.ene_x = self.p_ship.ship_x + 40
+                    new_enemy1.ene_y = self.boss.boss_y + 8
+                    new_enemy2.ene_x = self.p_ship.ship_x -30
+                    new_enemy2.ene_y = self.boss.boss_y + 8
+
+                    self.enemys.append(new_enemy2)
+
+                new_enemy.ene_y = self.boss.boss_y + 8
+                
                 self.enemys.append(new_enemy)
+                self.enemys.append(new_enemy1)
         
         if self.boss_count == 6:
             atk_speed = 9
