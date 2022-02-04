@@ -2,7 +2,7 @@
 python app.py
 
 # リソース編集モード
-pyxeleditor img.pyxres
+pyxel edit img.pyxres
 
 # exeにビルド
 pyxelpackager app.py

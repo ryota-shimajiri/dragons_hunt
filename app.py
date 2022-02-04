@@ -30,7 +30,7 @@ class APP:
     self.damage_flg = 0
     self.p_ship = unit.Ship()
 
-    p.init(settings.WINDOW_W, settings.WINDOW_H, caption="DRAGON'S HUNT")
+    p.init(settings.WINDOW_W, settings.WINDOW_H, title="DRAGON'S HUNT")
     # ドット絵を読み込む
     p.load("assets/img.pyxres")
 
@@ -97,17 +97,21 @@ class APP:
     # フィールド描画
     if self.boss_count == 1:
         #bltm(x, y, tm, u, v, w, h, [colkey])
-        p.bltm(0, 9, 0, 0, 16, 23, 17) #洞窟
+        #タイルマップtm (0-7) の (u, v) からサイズ (w, h) の領域を (x, y) にコピーします。
+        # w、hそれぞれに負の値を設定すると水平、垂直方向に反転します。
+        # colkeyに色を指定すると透明色として扱われます。
+        # 1タイルのサイズは8x8ピクセルで、(tile_x, tile_y)のタプルとしてタイルマップに格納されています。
+        p.bltm(0, 9, 0, 0, 130, 190, 130) #洞窟
     if self.boss_count == 2:
-        p.bltm(0, 9, 0, 0, 32, 23, 17) #火山
+        p.bltm(0, 9, 0, 0, 260, 190, 130) #火山
     if self.boss_count == 3:
-        p.bltm(0, 9, 0, 0, 48, 23, 17) #氷の洞窟
+        p.bltm(0, 9, 0, 0, 390, 190, 130) #氷の洞窟
     if self.boss_count == 4:
-        p.bltm(0, 9, 0, 0, 64, 23, 17) #毒沼
+        p.bltm(0, 9, 0, 0, 515, 190, 130) #毒沼
     if self.boss_count == 5:
-        p.bltm(0, 9, 0, 0, 80, 23, 17) #山脈
+        p.bltm(0, 9, 0, 0, 645, 190, 130) #山脈
     if self.boss_count == 6:
-        p.bltm(0, 9, 0, 0, 96, 23, 17) #城
+        p.bltm(0, 9, 0, 0, 770, 190, 130) #城
 
     # 爆発の描写
     for i in self.bombs:
