@@ -1,7 +1,7 @@
 from random import randint, randrange
-import unit
+import unit as unit
 import pyxel as p
-import settings
+import settings as settings
 
 PIC_H = settings.PIC_H
 PIC_W = settings.PIC_W
@@ -32,7 +32,7 @@ class APP:
 
     p.init(settings.WINDOW_W, settings.WINDOW_H, title="DRAGON'S HUNT")
     # ドット絵を読み込む
-    p.load("assets/img.pyxres")
+    p.load("../assets/img.pyxres")
 
     p.mouse(False)
     # ゲームを動かす
@@ -44,7 +44,7 @@ class APP:
     if p.btnp(p.KEY_Q):
         # 終了
         p.quit()
-        
+
     if p.btnp(p.KEY_T):
         # タイトル画面へ
         self.game_start = False
@@ -148,12 +148,12 @@ class APP:
                 p.blt(self.p_ship.ship_x, self.p_ship.ship_y, 0, 96, 0, -PIC_W, PIC_H, 6)
                 if p.frame_count % 5 == 0:
                     self.ship_motion_count = 1
-            
+
             elif self.ship_motion_count == 1:
                 p.blt(self.p_ship.ship_x, self.p_ship. ship_y, 0, 96, 16,-PIC_W, PIC_H, 6)
                 if p.frame_count % 5 == 0:
                     self.ship_motion_count = 2
-            
+
             elif self.ship_motion_count == 2:
                 p.blt(self.p_ship.ship_x, self.p_ship.ship_y, 0, 96, 32, -PIC_W, PIC_H, 6)
                 if p.frame_count % 5 == 0:
@@ -193,7 +193,7 @@ class APP:
             p.blt(self.boss.boss_x, self.boss.boss_y, 0, 64, 112, 48, 16, 6)
         if self.boss_count == 6:
             p.blt(self.boss.boss_x, self.boss.boss_y, 0, 64, 80, 48, 32, 6)
-        
+
     # 敵の描画とボスの攻撃
     for i in self.enemys:
         if self.boss_flug == False:
@@ -243,11 +243,11 @@ class APP:
         else:
             # ボスの攻撃エフェクト
             if self.boss_count == 1:
-                p.blt(i.ene_x, i.ene_y, 0, 48, 16, 16, 16, 6)  
+                p.blt(i.ene_x, i.ene_y, 0, 48, 16, 16, 16, 6)
             if self.boss_count == 2:
-                p.blt(i.ene_x, i.ene_y, 0, 48, 48, 16, 16, 6)  
+                p.blt(i.ene_x, i.ene_y, 0, 48, 48, 16, 16, 6)
             if self.boss_count == 3:
-                p.blt(i.ene_x, i.ene_y, 0, 48, 80, 16, 16, 6)  
+                p.blt(i.ene_x, i.ene_y, 0, 48, 80, 16, 16, 6)
             if self.boss_count == 4:
                 p.blt(i.ene_x, i.ene_y, 0, 48, 128, 16, 16, 6)
             if self.boss_count == 5:
@@ -275,8 +275,8 @@ class APP:
         p.text(50, 50, "G A M E  C L E A R", p.frame_count % 16)
         p.text(55, 70, "Congratulations!!", 7)
         p.text(70, 80, "T = TITLE", 7)
-     
- def ship_move(self): 
+
+ def ship_move(self):
     # 機体を前進させる
     if p.btn(p.KEY_UP):
         if self.p_ship.ship_y > 30:
@@ -303,7 +303,7 @@ class APP:
         # そのフレームにkeyが押されたらTrue、holdとperiodを指定すると、holdフレーム以上ボタンを押し続けた際に
         # periodフレーム間隔でTrueが返る
         if p.btnp(p.KEY_SPACE, 10, 10):
-            if self.p_ship.ship_st - settings.P_SHIP_ST_SHOOT_DECREASE >= 0: 
+            if self.p_ship.ship_st - settings.P_SHIP_ST_SHOOT_DECREASE >= 0:
                 self.p_ship.ship_st = self.p_ship.ship_st - settings.P_SHIP_ST_SHOOT_DECREASE
                 new_shot = unit.Shot()
                 new_shot.update(self.p_ship.ship_x, self.p_ship.ship_y)
@@ -311,7 +311,7 @@ class APP:
 
         # 斬撃の設定
         if p.btnp(p.KEY_V, 20, 10):
-            if self.p_ship.ship_st - settings.P_SHIP_ST_SLASH_DECREASE >= 0: 
+            if self.p_ship.ship_st - settings.P_SHIP_ST_SLASH_DECREASE >= 0:
                 self.p_ship.ship_st = self.p_ship.ship_st - settings.P_SHIP_ST_SLASH_DECREASE
                 new_slash = unit.Slash()
                 new_slash.update(self.p_ship.ship_x , self.p_ship.ship_y)
@@ -408,7 +408,7 @@ class APP:
                 new_enemy = unit.Enemy(9)
                 new_enemy.ene_x = self.boss.boss_x + 5
                 new_enemy.ene_y = self.boss.boss_y + 8
-                # 敵の攻撃は当たり判定の無い敵とする                   
+                # 敵の攻撃は当たり判定の無い敵とする
                 self.enemys.append(new_enemy)
 
         if self.boss_count == 2:
@@ -416,11 +416,11 @@ class APP:
             if p.frame_count % atk_speed == 0:
                 new_enemy = unit.Enemy(9)
                 new_enemy.ene_x = self.boss.boss_x + 0
-                new_enemy.ene_y = self.boss.boss_y + 8                      
+                new_enemy.ene_y = self.boss.boss_y + 8
                 self.enemys.append(new_enemy)
                 new_enemy = unit.Enemy(9)
                 new_enemy.ene_x = self.boss.boss_x + 40
-                new_enemy.ene_y = self.boss.boss_y + 8   
+                new_enemy.ene_y = self.boss.boss_y + 8
                 self.enemys.append(new_enemy)
 
         if self.boss_count == 3:
@@ -428,23 +428,23 @@ class APP:
             if p.frame_count % atk_speed == 0:
                 new_enemy = unit.Enemy(9)
                 new_enemy.ene_x = self.boss.boss_x + 0
-                new_enemy.ene_y = self.boss.boss_y + 8                      
+                new_enemy.ene_y = self.boss.boss_y + 8
                 self.enemys.append(new_enemy)
                 new_enemy = unit.Enemy(9)
                 new_enemy.ene_x = self.boss.boss_x + 35
-                new_enemy.ene_y = self.boss.boss_y + 8   
+                new_enemy.ene_y = self.boss.boss_y + 8
                 self.enemys.append(new_enemy)
-            
+
         if self.boss_count == 4:
             atk_speed = 30 - (self.boss_count * 2)
             if p.frame_count % atk_speed == 0:
                 new_enemy = unit.Enemy(9)
                 new_enemy.ene_x = self.boss.boss_x + 10
-                new_enemy.ene_y = self.boss.boss_y + 8                    
+                new_enemy.ene_y = self.boss.boss_y + 8
                 self.enemys.append(new_enemy)
                 new_enemy = unit.Enemy(9)
                 new_enemy.ene_x = self.boss.boss_x + 20
-                new_enemy.ene_y = self.boss.boss_y + 8   
+                new_enemy.ene_y = self.boss.boss_y + 8
                 self.enemys.append(new_enemy)
 
         if self.boss_count == 5:
@@ -471,10 +471,10 @@ class APP:
                     self.enemys.append(new_enemy2)
 
                 new_enemy.ene_y = self.boss.boss_y + 8
-                
+
                 self.enemys.append(new_enemy)
                 self.enemys.append(new_enemy1)
-        
+
         if self.boss_count == 6:
             atk_speed = 9
             if p.frame_count % atk_speed == 0:
@@ -484,9 +484,9 @@ class APP:
                     new_enemy.ene_x = self.p_ship.ship_x + 5
                 else:
                     new_enemy.ene_x = self.p_ship.ship_x + 5
-                new_enemy.ene_y = self.boss.boss_y + 8                      
+                new_enemy.ene_y = self.boss.boss_y + 8
                 self.enemys.append(new_enemy)
-    
+
     enemy_count = len(self.enemys)
     for e in range (enemy_count):
         # 敵のモーション
@@ -498,7 +498,7 @@ class APP:
             if self.enemys[e].variation == 1:
                 # 座標に数字を足すことで落下速度を決める
                 self.enemys[e].ene_y = self.enemys[e].ene_y + 1.3
-                
+
             elif self.enemys[e].variation == 2:
                 self.enemys[e].ene_y = self.enemys[e].ene_y + 1.3
                 # 2番の敵はここでx移動をさせる
@@ -536,7 +536,7 @@ class APP:
                     self.enemys[e].ene_y = (self.enemys[e].ene_y + 1.5)
                 else:
                     self.enemys[e].ene_y = (self.enemys[e].ene_y + 1.0)
-            
+
             if p.frame_count % 10 == 0 and ene_chk == 0:
                 if self.boss_flug == False:
                     # 敵のx座標
@@ -571,7 +571,7 @@ class APP:
         else:
             del self.enemys[e]
             break
-    
+
  def e_move_chk(self, me, x, y):
     enemy_hit = len(self.enemys)
     for e in range(enemy_hit):
@@ -585,7 +585,7 @@ class APP:
         else:
             result = 0
             return result
-     
+
  def hit_chk(self): #当たり判定関数
     slash_count = len(self.slash)
 
@@ -596,9 +596,9 @@ class APP:
             enemy_hit = len(self.enemys)
             for e in range (enemy_hit):
                 # xから左右まで35の斬撃の範囲に触れたら
-                if ((self.enemys[e].ene_x - 35 <= self.slash[h].pos_x 
+                if ((self.enemys[e].ene_x - 35 <= self.slash[h].pos_x
                     <= self.enemys[e].ene_x + 35)and
-                    (self.enemys[e].ene_y - 7 <= self.slash[h].pos_y <= 
+                    (self.enemys[e].ene_y - 7 <= self.slash[h].pos_y <=
                     self.enemys[e].ene_y + 25)):
                     # 敵に当たったらその座標に爆発を乗せる
                     new_bomb = unit.Bomb(self.enemys[e].ene_x, self.enemys[e].ene_y)
@@ -632,9 +632,9 @@ class APP:
             for h in range (shot_hit):
                 enemy_hit = len(self.enemys)
                 for e in range (enemy_hit):
-                    if ((self.enemys[e].ene_x - 8 <= self.shots[h].pos_x 
+                    if ((self.enemys[e].ene_x - 8 <= self.shots[h].pos_x
                         <= self.enemys[e].ene_x + 8)and
-                        (self.enemys[e].ene_y - 7 <= self.shots[h].pos_y <= 
+                        (self.enemys[e].ene_y - 7 <= self.shots[h].pos_y <=
                         self.enemys[e].ene_y)):
                         # 敵に当たったらその座標に爆発を乗せる
                         new_bomb = unit.Bomb(self.enemys[e].ene_x, self.enemys[e].ene_y)
@@ -674,7 +674,7 @@ class APP:
                 (self.enemys[e].ene_y + 6 >= self.p_ship.ship_y) and
                 (self.enemys[e].ene_y + 6 <= self.p_ship.ship_y + 14))):
                 # 自機の受けるダメージ計算
-                if self.p_ship.ship_hp > 0: 
+                if self.p_ship.ship_hp > 0:
                     self.p_ship.ship_hp = self.p_ship.ship_hp - settings.P_SHIP_DAMAGE_COUNT
                     if self.p_ship.ship_hp == 0:
                         self.game_over = True
@@ -688,7 +688,7 @@ class APP:
         if self.score != 0:
             # スコアがboss_appearsに当てはまればボス出現
             if self.score in self.boss_appears:
-                #ゲームクリアフラグがない場合にボス発生 
+                #ゲームクリアフラグがない場合にボス発生
                 if self.game_clear == False:
                     self.boss_flug = True
                     self.enemys.clear()
@@ -711,7 +711,7 @@ class APP:
                     elif self.boss_count == 6:
                         self.boss_hp = 400
                     self.boss.update(70, 10, self.boss_hp)
-                     
+
     # ボスの動き＆当たり判定
     if self.boss_flug == True:
         # 当たり範囲
@@ -828,9 +828,9 @@ class APP:
         slash_hit = len(self.slash)
         for h in range (slash_hit):
             # 近接攻撃の当たり判定
-            if ((self.boss.boss_x - 35 <= self.slash[h].pos_x 
+            if ((self.boss.boss_x - 35 <= self.slash[h].pos_x
                  <= self.boss.boss_x + 35) and
-                (self.boss.boss_y - 7 <= self.slash[h].pos_y 
+                (self.boss.boss_y - 7 <= self.slash[h].pos_y
                  <= self.boss.boss_y + 25)):
                 self.boss.boss_h = self.boss.boss_h - 3
                 new_bomb = unit.Bomb(self.slash[h].pos_x, self.slash[h].pos_y -16)
@@ -839,15 +839,15 @@ class APP:
         shot_hit = len(self.shots)
         for h in range (shot_hit):
             # 遠距離攻撃の当たり判定
-            if ((self.boss.boss_x - 8 <= self.shots[h].pos_x 
+            if ((self.boss.boss_x - 8 <= self.shots[h].pos_x
                  <= self.boss.boss_x + hitbox_x) and
-                (self.boss.boss_y <= self.shots[h].pos_y 
+                (self.boss.boss_y <= self.shots[h].pos_y
                  <= self.boss.boss_y + hitbox_y)):
                 self.shots[h].shot_del()
                 self.boss.boss_h = self.boss.boss_h - 1
                 new_bomb = unit.Bomb(self.shots[h].pos_x, self.shots[h].pos_y)
                 self.bombs.append(new_bomb)
-                
+
     # ボス消滅
     if self.boss.boss_h <= 0:
         if self.boss_flug == True:
@@ -858,11 +858,11 @@ class APP:
             self.boss_count = self.boss_count + 1
             # WARNINGが再び出るようにリセット
             self.warning_count = 0
-            self.warning_flg = True      
+            self.warning_flg = True
             if self.boss_count == 7: #6面のボスを倒すとゲームクリア
                 self.game_clear = True
 
- def bomb_del(self): 
+ def bomb_del(self):
     #爆発の寿命制御
     for b in self.bombs:
         b.bomb_t = b.bomb_t + 5
